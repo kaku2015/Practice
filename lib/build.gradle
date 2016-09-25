@@ -1,0 +1,12 @@
+apply plugin: 'java'
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+}
+
+// 解决控制台输入中文乱码
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
