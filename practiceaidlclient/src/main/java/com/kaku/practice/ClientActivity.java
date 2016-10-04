@@ -72,6 +72,12 @@ public class ClientActivity extends AppCompatActivity {
     private ServiceConnection mConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
+            // 如果客户端和服务端处于同一个进程，onServiceConnected()回调中，是可以通过强制类型转换将返回的Binder对象转换为我们需要的接口对象的，像这样：
+            // mRemoteService = (IRemoteService) service;
+            // 但如果客户端和服务端处于不同进程，执行这样的强转，系统会报错：
+            // java.lang.ClassCastException: android.os.BinderProxy cannot be cast to learn.android.kangel.learning.IRemoteService
+            // 我的对此理解是，由于不同进程之间的内存空间是不能够互相访问的，A进程中的对象当然也就不能为B进程所理解。因此强制类型转换只适用于同一个进程中。
+
             mRemoteService = IRemoteService.Stub.asInterface(service);
             mBind = true;
         }
