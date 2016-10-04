@@ -49,6 +49,12 @@ public class ClientActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        if (!mBind) {
+            attemptToBingService();
+        }
+    }
+
+    private void attemptToBingService() {
         Intent intent = new Intent("com.kaku.practice.RemoteService");
         intent.setPackage("com.kaku.practice");
         bindService(intent, mConnection, BIND_AUTO_CREATE);
@@ -57,8 +63,10 @@ public class ClientActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        unbindService(mConnection);
-        mBind = false;
+        if (mBind) {
+            unbindService(mConnection);
+            mBind = false;
+        }
     }
 
     private ServiceConnection mConnection = new ServiceConnection() {

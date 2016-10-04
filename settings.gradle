@@ -1,1 +1,1 @@
-include ':app', ':lib', ':practiceaidlclient'
+include ':app', ':lib', ':practiceaidlclient', ':aidl'
