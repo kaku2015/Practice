@@ -14,7 +14,7 @@ buildscript {
 
     }
     dependencies {
-        classpath ('com.android.tools.build:gradle:2.2.2'){
+        classpath ('com.android.tools.build:gradle:2.2.3'){
             force = true
         }
 //        classpath group: 'skr', name: 'hellotask', version: '1.0'
